@@ -16,6 +16,19 @@
 - 23.06.15:  
 [영화리뷰앱 DB 만들기 / FULLTEXT](230615.md)  
 
+## api 서버 만들 때
+- 모든 권한이 있는 admin유저를 사용하지 않고
+- 한 Schema에만 권한이 있는 유저를 만들기
+```SQL
+-- 서버가 db에 접속할 수 있도록 계정 생성
+use mysql;
+create user 'recipe_db_user'@'%' identified by '1234'; -- 비밀번호 1234
+-- api서버에서 db에 접속할 아이디 생성
+-- @'%'는 접속경로를 말함.
+grant ALL privileges on recipe_db.* to 'recipe_db_user'@'%';
+-- 권한 주기(레시피db의 모든 테이블)
+```
+
 ## 기능구현 팁
 - 메인화면이 가장 많은 데이터들이 모여있기 때문에(조인을 많이함)  
 가장 어려움. 나중에 하는거 추천
